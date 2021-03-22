@@ -1,0 +1,18 @@
+.home_page_bg {
+  background-color: #dae0e6;
+}
+.home_page {
+  padding: 25px;
+}
+.create_post {
+  height: auto;
+}
+.create_post_input {
+  background-color: #f6f7f8;
+  margin: 10px;
+  width: auto;
+}
+.create_post_input:hover {
+  background-color: white;
+  border: 1px solid royalblue;
+}

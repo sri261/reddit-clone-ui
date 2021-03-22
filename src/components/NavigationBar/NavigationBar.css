@@ -1,0 +1,11 @@
+.nav_button {
+  width: 150px;
+  margin: 0px 5px;
+  padding: 4px 15px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.navbar_search {
+  width: 800px;
+}

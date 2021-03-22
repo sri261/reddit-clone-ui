@@ -10,7 +10,7 @@ import { authSelectors } from "./store/authSlice";
 import { RootState } from "./store/store";
 import { User } from "./interfaces/User";
 import Home from "./pages/Home";
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 function App() {
   // const user = useSelector(authSelectors.user);
@@ -29,9 +29,6 @@ function App() {
         </Route>
       </BrowserRouter>
     </>
-    // <BrowserRouter>
-    //   <Switch></Switch>
-    // </BrowserRouter>
   );
 }
 

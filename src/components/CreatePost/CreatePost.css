@@ -1,0 +1,31 @@
+.create_post_card {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.create_post_card_input {
+  background-color: #f6f7f8;
+  margin: 10px;
+  width: 100%;
+  border: 1px solid #f6f7f8;
+  border-radius: 2px;
+}
+.create_post_input {
+  background-color: #f6f7f8;
+}
+.create_post_input:hover {
+  background-color: white;
+}
+.create_post_card_input:hover {
+  background-color: rgb(136, 64, 64);
+  border: 1px solid royalblue;
+  border-radius: 2px;
+}
+.create_post_card_icon {
+  font-size: 25px;
+  color: #878a8c;
+  margin: 5px 5px 10px 5px;
+}

@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
-import { FaNewspaper } from "react-icons/fa";
-import { MdModeComment } from "react-icons/md";
-import {} from "react-icons/md";
+import { FaNewspaper, FaCommentAlt } from "react-icons/fa";
+import { IoIosShareAlt } from "react-icons/io";
 
 import "./Post.css";
 
@@ -53,7 +52,37 @@ function Post() {
                   Posted by u/sample 10 hours ago
                 </div>
               </Row>
-              <Row></Row>
+              <Row
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <FaCommentAlt fontSize="15px" style={{ marginLeft: "5px" }} />
+                  <div>10.3k</div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <IoIosShareAlt
+                    fontSize="20px"
+                    style={{ marginLeft: "5px" }}
+                  />
+                  <div>Share</div>
+                </div>
+              </Row>
             </div>
           </Col>
         </Row>

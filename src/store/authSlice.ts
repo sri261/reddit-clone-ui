@@ -42,6 +42,21 @@ export const login = createAsyncThunk(
   }
 );
 
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async ({ username, password }: LoginI) => {
+    // const user: User = await api
+    const user = await api
+
+      .post("/signup", {
+        username: username,
+        password: password,
+      })
+      .then(extractStandardResponseData);
+    return user;
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,

@@ -15,6 +15,9 @@ function Home() {
         <Col>
           <CreatePost />
           <Post />
+          <Post />
+          <Post />
+          <Post />
         </Col>
         <Col sm={3}>
           <Card>left</Card>

@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  Card,
-  Row,
-  Col,
-  Container,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Card, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { FaImage } from "react-icons/fa";
 import { BiLink } from "react-icons/bi";
-import { FaReddit } from "react-icons/fa";
 
 import "./CreatePost.css";
 
@@ -20,9 +12,6 @@ export function CreatePost() {
   return (
     <div>
       <Card className="create_post_card">
-        {/* <div>
-          <FaReddit />
-        </div> */}
         <div className="create_post_card_input">
           <FormControl
             placeholder="Create Post"

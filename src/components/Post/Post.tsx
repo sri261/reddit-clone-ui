@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FaNewspaper, FaCommentAlt } from "react-icons/fa";
 import { IoIosShareAlt } from "react-icons/io";
 
 import "./Post.css";
+import { Subreddit } from "../../interfaces/Subreddit";
+interface Props {
+  details?: Subreddit;
+}
 
-function Post() {
+function Post(props: Props) {
+  useEffect(() => {}, []);
   return (
     <div>
       <Card>
@@ -42,11 +47,13 @@ function Post() {
             <div style={{ marginLeft: "5px" }}>
               <Row>
                 <h6 style={{ marginTop: "8px", marginBottom: "0px" }}>
-                  This is the title for this post with bold
+                  {props.details?.description}
                 </h6>
               </Row>
               <Row>
-                <h6 style={{ fontSize: "85%" }}>r/subredd</h6>
+                <h6
+                  style={{ fontSize: "85%" }}
+                >{`r/${props.details?.title}`}</h6>
                 &nbsp;
                 <div style={{ fontSize: "12px", color: "#878a8c" }}>
                   Posted by u/sample 10 hours ago

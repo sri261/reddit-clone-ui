@@ -27,9 +27,6 @@ function App() {
         <Route exact path="/submit">
           crete post
         </Route>
-        <Route exact path="/signup">
-          signup
-        </Route>
       </BrowserRouter>
     </>
   );

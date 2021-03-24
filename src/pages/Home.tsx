@@ -14,7 +14,7 @@ function Home() {
     <div className="home_page_bg">
       <Row className="home_page">
         <Col>
-          <CheckAuth>
+          <CheckAuth isPrivate={true}>
             <CreatePost />
           </CheckAuth>
           <Post />

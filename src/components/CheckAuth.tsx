@@ -2,13 +2,21 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { authSelectors } from "../store/authSlice";
 
-function CheckAuth({ children }: any) {
+interface Props {
+  isPrivate: boolean;
+  children: JSX.Element;
+}
+function CheckAuth({ isPrivate, children }: Props) {
   const user = useSelector(authSelectors.user);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-  return user ? <div>{children}</div> : null;
+  useEffect(() => {}, [user]);
+  return isPrivate ? (
+    user ? (
+      <div>{children}</div>
+    ) : null
+  ) : user ? null : (
+    <div>{children}</div>
+  );
 }
 
 export default CheckAuth;

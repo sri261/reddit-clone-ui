@@ -31,6 +31,7 @@ const initialState = {
 export const login = createAsyncThunk(
   "auth/login",
   async ({ username, password }: LoginI) => {
+    console.log("inside login dispatch functon");
     const user: User = await api
       .post("/login", {
         username: username,
@@ -54,6 +55,13 @@ export const signup = createAsyncThunk(
     return user;
   }
 );
+
+// export const checkToken = createAsyncThunk(
+//   "auth/checkToken",
+//   async (token: string) => {
+//     // const user;
+//   }
+// );
 
 export const authSlice = createSlice({
   name: "auth",

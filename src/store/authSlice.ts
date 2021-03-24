@@ -45,9 +45,7 @@ export const login = createAsyncThunk(
 export const signup = createAsyncThunk(
   "auth/signup",
   async ({ username, password }: LoginI) => {
-    // const user: User = await api
-    const user = await api
-
+    const user: User = await api
       .post("/signup", {
         username: username,
         password: password,
@@ -64,6 +62,11 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, { payload }) => ({
+      id: payload.id,
+      username: payload.username,
+      token: payload.token,
+    }));
+    builder.addCase(signup.fulfilled, (state, { payload }) => ({
       id: payload.id,
       username: payload.username,
       token: payload.token,

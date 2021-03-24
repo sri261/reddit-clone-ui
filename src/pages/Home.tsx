@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import "./pages.css";
 import CreatePost from "../components/CreatePost/CreatePost";
 import Post from "../components/Post/Post";
+import CheckAuth from "../components/CheckAuth";
 
 function Home() {
   const history = useHistory();
@@ -13,7 +14,9 @@ function Home() {
     <div className="home_page_bg">
       <Row className="home_page">
         <Col>
-          <CreatePost />
+          <CheckAuth>
+            <CreatePost />
+          </CheckAuth>
           <Post />
           <Post />
           <Post />

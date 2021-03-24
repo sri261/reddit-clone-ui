@@ -29,12 +29,12 @@ function NavigationBar() {
     e.preventDefault();
     dispatch(signup({ username, password }))
       .then((response) => {
-        console.log(response);
+        console.log(response, "response at dispatch ");
+        setShowModal(false);
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(password, username);
   };
 
   return (
@@ -49,9 +49,9 @@ function NavigationBar() {
             <div>&nbsp; reddit</div>
           </div>
         </NavbarBrand>
-        <div>
+        {/* <div>
           <FormControl className="navbar_search"></FormControl>
-        </div>
+        </div> */}
         <div style={{ display: "flex", alignItems: "flex-end" }}>
           <Button variant="outline-primary" className="nav_button">
             Log In
@@ -59,7 +59,6 @@ function NavigationBar() {
           <Button
             onClick={() => {
               setShowModal(true);
-              console.log(showModal, "showModal");
             }}
             variant="primary"
             className="nav_button"

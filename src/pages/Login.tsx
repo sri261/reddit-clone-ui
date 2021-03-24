@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Card, Container, Col, Row } from "react-bootstrap";
 
 import { useAppDispatch } from "../store/store";
-import { login } from "../store/authSlice";
+import { signup } from "../store/authSlice";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -11,7 +11,7 @@ function Login() {
 
   const onFromSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(login({ username, password }))
+    dispatch(signup({ username, password }))
       .then((response) => {
         console.log(response);
       })

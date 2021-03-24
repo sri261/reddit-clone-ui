@@ -92,6 +92,18 @@ function NavigationBar() {
               Sign Up
             </Button>
           </CheckAuth>
+          <CheckAuth isPrivate={true}>
+            <Button
+              onClick={() => {
+                setShowModal(false);
+              }}
+              variant="primary"
+              className="nav_button"
+              color="#0079d3"
+            >
+              Log Out
+            </Button>
+          </CheckAuth>
         </div>
         {/* <SignUpModal showModal={showModal} /> */}
         {/* TODO:create a modal component */}

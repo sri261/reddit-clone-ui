@@ -9,12 +9,15 @@ import Post from "../components/Post/Post";
 import CheckAuth from "../components/CheckAuth";
 import { getSubreddits } from "../store/subredditSlice";
 import { subredditSelector } from "../store/subredditSlice";
+import { authSelectors } from "../store/authSlice";
 
 function Home() {
   const dispatch = useAppDispatch();
   const subreddits = useSelector(subredditSelector.subreddits);
+  const user = useSelector(authSelectors.user);
 
   useEffect(() => {
+    console.log(user);
     if (Object.keys(subreddits).length === 0) {
       dispatch(getSubreddits())
         .then()
@@ -22,12 +25,26 @@ function Home() {
           console.log(error);
         });
     }
-  }, [subreddits]);
+  }, [subreddits, user]);
 
   const renderSubReddits = () => {
-    return Object.keys(subreddits).map((key) => {
-      return <Post details={subreddits[key]} />;
-    });
+    if (user) {
+      return (
+        <div>
+          <Post></Post>
+        </div>
+      );
+    } else {
+      return Object.keys(subreddits).map((key) => {
+        return (
+          <div>
+            <CheckAuth isPrivate={false}>
+              <Post details={subreddits[key]} />
+            </CheckAuth>
+          </div>
+        );
+      });
+    }
   };
 
   return (

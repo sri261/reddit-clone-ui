@@ -1,0 +1,22 @@
+.my-modal {
+  width: 90vw;
+  max-width: 90vw;
+}
+.comments_modal {
+  /* margin-top: 400px; */
+}
+.modal_header {
+  display: flex;
+  align-items: center;
+}
+.modal_votes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  width: 5rem;
+}
+.modal_title {
+  margin-left: 2rem;
+}

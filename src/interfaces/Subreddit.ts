@@ -1,6 +1,8 @@
 export interface Subreddit {
   id: number;
-  title: string;
+  user_id: number;
+  subreddit_name: string;
   description: string;
-  creatorId: number;
+  timestamp: string;
+  updated_timestamp: string;
 }

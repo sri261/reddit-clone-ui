@@ -1,0 +1,11 @@
+.create_community_main {
+  display: flex;
+  height: 90vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+.create_community_main_card {
+  width: 70vw;
+  height: 50vh;
+}

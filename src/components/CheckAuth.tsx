@@ -5,6 +5,7 @@ import { authSelectors } from "../store/authSlice";
 interface Props {
   isPrivate: boolean;
   children: JSX.Element;
+  // visibleBeforeLogin: boolean;
 }
 function CheckAuth({ isPrivate, children }: Props) {
   const user = useSelector(authSelectors.user);

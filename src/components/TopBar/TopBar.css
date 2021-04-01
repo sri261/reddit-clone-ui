@@ -1,0 +1,18 @@
+.top-bar-icon-wrapper {
+  font-size: 130%;
+  margin: 10px 10px;
+  /* background-color: aqua; */
+  padding: 4px 30px;
+  border-radius: 40px;
+}
+
+.top-bar-icon-wrapper:hover {
+  background-color: #f6f7f8;
+}
+
+.top_bar_icon {
+  color: #7f8183;
+}
+.top_bar_icon:hover {
+  color: #0e81d5;
+}

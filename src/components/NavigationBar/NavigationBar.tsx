@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   Navbar,
@@ -8,12 +8,15 @@ import {
   Form,
 } from "react-bootstrap";
 import { FaReddit } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 import "./NavigationBar.css";
 import { useAppDispatch } from "../../store/store";
 import { signup, login } from "../../store/authSlice";
 import CheckAuth from "../CheckAuth";
+import { authSelectors } from "../../store/authSlice";
 
+import { getLatestPostsForUser } from "../../store/postSlice";
 function NavigationBar() {
   const [showModal, setShowModal] = useState(false);
   const [showLogininModal, setLoginModalShowModal] = useState(false);
@@ -22,13 +25,13 @@ function NavigationBar() {
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
+  // const user_id = useSelector(authSelectors.user_id);
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     dispatch(signup({ username, password }))
       .then((response) => {
-        console.log(response, "response at dispatch ");
         setShowModal(false);
         setLoading(false);
       })
@@ -43,7 +46,6 @@ function NavigationBar() {
     setLoading(true);
     dispatch(login({ username, password }))
       .then((response) => {
-        console.log(response, "response at dispatch ");
         setLoginModalShowModal(false);
         setLoading(false);
       })
@@ -52,6 +54,10 @@ function NavigationBar() {
         setLoading(false);
       });
   };
+
+  // useEffect(() => {
+  //   console.log(user_id);
+  // }, [user_id]);
   return (
     <>
       <Navbar

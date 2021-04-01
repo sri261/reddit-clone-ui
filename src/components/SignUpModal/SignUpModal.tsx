@@ -38,7 +38,6 @@ function SignUpModal(props: SignUpModalProps) {
         show={showModal}
         onHide={() => {
           setShowModal(false);
-          console.log(showModal, "modal close cross");
         }}
         size="lg"
       >

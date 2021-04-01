@@ -80,4 +80,5 @@ export const authSlice = createSlice({
 export const authSelectors = {
   token: (state: RootState) => state.auth.token,
   user: (state: RootState) => state.auth.username,
+  user_id: (state: RootState) => state.auth.id,
 };

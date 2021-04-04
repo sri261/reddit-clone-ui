@@ -14,14 +14,7 @@ export const searchSubreddit = createAsyncThunk(
   async (input: string) => {
     const subreddits = api
       .post("subreddits/search", { search: input })
-      // .then((r) => {
-      //   console.log(r);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
       .then(extractStandardResponseData);
-    // console.log(subreddits);
     return subreddits;
   }
 );
@@ -29,16 +22,25 @@ export const searchSubreddit = createAsyncThunk(
 export const createNewSubreddit = createAsyncThunk(
   "subreddit/create/new",
   async (subreddit: any) => {
-    console.log(subreddit);
     api.post("/subreddits", subreddit).then(extractStandardResponseData);
   }
 );
-export const getSubreddits = createAsyncThunk("subreddit/create", async () => {
-  const subreddits = await api
-    .post("subreddit/get")
-    .then(extractStandardResponseData);
-  return subreddits;
-});
+
+export const getSubredditDetails = createAsyncThunk(
+  "subreddit/create",
+  async (subreddit_id: number) => {
+    return await api
+      .get(`subreddits/${subreddit_id}`)
+      .then(extractStandardResponseData);
+  }
+);
+
+export const updateSubreddit = createAsyncThunk(
+  "subreddit/create",
+  async () => {
+    const updateSub = await api.post(`subreddits`);
+  }
+);
 
 export const subredditAdapter = createEntityAdapter<Subreddit>();
 
@@ -47,12 +49,16 @@ export const subredditSlice = createSlice({
   initialState: subredditAdapter.getInitialState(),
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getSubreddits.fulfilled, (state, { payload }) => {
+    builder.addCase(getSubredditDetails.fulfilled, (state, { payload }) => {
       subredditAdapter.upsertMany(state, payload);
     });
   },
 });
 
 export const subredditSelector = {
-  subreddits: (state: RootState) => state.subreddits.entities,
+  subreddit: (state: RootState) => state.subreddits.entities,
+
+  // subreddit: (state: any, subreddit_id: number) => {
+  //   return state.subreddits.entities[subreddit_id];
+  // },
 };

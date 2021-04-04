@@ -5,4 +5,5 @@ export interface Subreddit {
   description: string;
   timestamp: string;
   updated_timestamp: string;
+  image_location: string;
 }

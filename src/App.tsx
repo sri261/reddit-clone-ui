@@ -11,6 +11,7 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import SubredditPage from "./pages/SubredditPage/SubrredditPage";
 import CreateCommunityPage from "./pages/CreateCommunityPage/CreateCommunityPage";
 import New from "./pages/New/New";
+import EditSubreddit from "./pages/EditSubreddit/EditSubreddit";
 function App() {
   return (
     <>
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route exact path="/subreddit/:subredditId/:subredditName">
               <SubredditPage />
+            </Route>
+            <Route exact path="/subreddit/:subredditId/:subredditName/edit">
+              <EditSubreddit />
             </Route>
             <Route exact path="/create-community">
               <NavigationBar />

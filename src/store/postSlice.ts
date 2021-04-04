@@ -66,7 +66,6 @@ export const getSubredditPosts = createAsyncThunk(
   async (subredditId: number) => {
     return await api
       .get(`/posts/${subredditId}`)
-      // .get("posts/7")
       .then(extractStandardResponseData);
   }
 );

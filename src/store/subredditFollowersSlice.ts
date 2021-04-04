@@ -7,7 +7,6 @@ import { api } from "../api/api";
 import { extractStandardResponseData } from "../api/api";
 import { RootState } from "./store";
 
-// FIXME: remove hardcoded url
 export const getSubredditDetails = createAsyncThunk(
   "subreddits/get",
   async (subredditId: number) => {
@@ -26,7 +25,11 @@ export const subredditFollowersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getSubredditDetails.fulfilled, (state, { payload }) => {
-      subredditFollowersAdapter.upsertMany(state, payload);
+      subredditFollowersAdapter.setAll(state, payload);
     });
   },
 });
+
+export const subredditFollowersSelector = {
+  subredditFollowers: (state: RootState) => state.subredditFollowers.entities,
+};

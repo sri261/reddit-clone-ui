@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Col, Row, Card, Button, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
@@ -14,37 +14,44 @@ import {
 } from "../../store/postSlice";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import Post from "../../components/Post/Post";
-import { authSelectors } from "../../store/authSlice";
+import { authSelectors, followSubreddit } from "../../store/authSlice";
 import { getSubredditDetails } from "../../store/subredditFollowersSlice";
+import { subredditFollowersSelector } from "../../store/subredditFollowersSlice";
 
 function SubrredditPage() {
+  const [joined, setJoined] = useState<boolean>(false);
   const { subredditId, subredditName } = useParams<any>();
+  const [subredditCreatorId, setSubredditCreatorId] = useState<number>();
+
   const history = useHistory();
   const dispatch = useAppDispatch();
   const posts = useSelector(postsSelector.posts);
   const user = useSelector(authSelectors.user);
-
+  const userId = useSelector(authSelectors.user_id);
+  const followedSubreddits = useSelector(authSelectors.followed_subreddits);
   useEffect(() => {
     if (Object.keys(posts).length === 0) {
       dispatch(getSubredditPosts(subredditId))
-        .then((res) => {})
+        .then()
         .catch((err) => {
           console.log(err);
         });
     }
+    Object.keys(posts).map((key) => {
+      console.log(posts[key].subreddit.user_id);
+      setSubredditCreatorId(posts[key].subreddit.user_id);
+    });
 
-    dispatch(getSubredditDetails(subredditId))
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    followedSubreddits?.map((subreddit_id) => {
+      if (subredditId == subreddit_id) {
+        setJoined(true);
+      }
+    });
 
     window.onpopstate = () => {
       dispatch(emptyPostsSlice());
     };
-  }, [posts]);
+  }, [posts, user]);
 
   return (
     <div>
@@ -66,12 +73,29 @@ function SubrredditPage() {
           ) : null}
 
           {Object.keys(posts).map((key) => {
-            // console.log(posts[key]);
             return <Post details={posts[key]} />;
           })}
         </Col>
         <Col sm={3}>
-          <Button>Join</Button>
+          <Button
+            onClick={() => {
+              console.log({ userId, subredditId }, "at button");
+              user
+                ? dispatch(
+                    followSubreddit({
+                      subreddit_id: parseInt(subredditId),
+                      user_id: userId,
+                    })
+                  )
+                    .then((res) => {})
+                    .catch((err) => {
+                      console.log(err);
+                    })
+                : console.log("please login or sign up to continue");
+            }}
+          >
+            {joined ? "Joined" : "Join"}
+          </Button>
           <Card>
             <Card.Title
               style={{
@@ -93,6 +117,13 @@ function SubrredditPage() {
                 Create Post
               </Button>
             ) : null}
+            <Card.Footer>
+              {subredditCreatorId === userId ? (
+                <Link to={`/subreddit/${subredditId}/${subredditName}/edit`}>
+                  Edit Community
+                </Link>
+              ) : null}
+            </Card.Footer>
           </Card>
         </Col>
       </Row>

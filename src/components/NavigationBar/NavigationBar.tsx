@@ -70,9 +70,7 @@ function NavigationBar() {
             <div>&nbsp; reddit</div>
           </div>
         </NavbarBrand>
-        {/* <div>
-          <FormControl className="navbar_search"></FormControl>
-        </div> */}
+
         <div style={{ display: "flex", alignItems: "flex-end" }}>
           <CheckAuth isPrivate={false}>
             <Button

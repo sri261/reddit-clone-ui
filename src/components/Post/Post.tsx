@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Modal, Button } from "react-bootstrap";
+import { Card, Row, Col, Modal, Button, Image } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FaNewspaper, FaCommentAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -23,13 +23,10 @@ interface Details extends PostI {
 
 interface PostProps {
   details?: any;
-  // inSubredditPage: boolean;
 }
 
-// const SelectedSubredditIdContext = React.createContext(details.subreddit.id);
-
 function Post({ details }: PostProps) {
-  const [subredditId, setSubredditId] = useState(details.subreddit.id);
+  const [subredditId, setSubredditId] = useState(details?.subreddit.id);
   const [subredditName, setSubredditName] = useState(
     details.subreddit.subreddit_name
   );
@@ -40,7 +37,7 @@ function Post({ details }: PostProps) {
   const history = useHistory();
 
   useEffect(() => {
-    // console.log(details, "details");
+    console.log(details.image_location, "details");
   }, [details]);
 
   return (
@@ -52,9 +49,9 @@ function Post({ details }: PostProps) {
           setModal(false);
         }}
         dialogClassName="my-modal"
-        // classname="comments_modal"
+        className="modal"
       >
-        {/* {console.log(details)} */}
+        {console.log(details)}
         <Modal.Header closeButton style={{ backgroundColor: "black" }}>
           <Modal.Title style={{ color: "white", fontSize: "15px" }}>
             <div className="modal_header">
@@ -67,17 +64,27 @@ function Post({ details }: PostProps) {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Row>
+        <Row className="modal_content">
           <Col>
-            <Card>
+            <Card className="modal_image_card">
+              {/* ----------- modal image------------------ */}
+              <Row className="post_comment_image">
+                {details.image_location !== null ? (
+                  <img
+                    src={`${details.image_location}`}
+                    className="post_comment_image_image"
+                  />
+                ) : null}
+              </Row>
+              {/* ------------------- comments component----------------- */}
               <Comments post_id={details?.id} />
             </Card>
           </Col>
           <Col sm={3}>
             <div className="p-100">
-              <Card>
+              <Card className="modal_info_card">
                 {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                <Card.Title>
+                <Card.Title className="modal_info_card_title">
                   {`r/${details?.subreddit.subreddit_name}`}
                 </Card.Title>
                 <Card.Body>
@@ -146,19 +153,45 @@ function Post({ details }: PostProps) {
             </div>
           </Col>
           {/* ------------------- image ------------------------- */}
-          <Col
-            xs={1}
-            style={{
-              backgroundColor: "#f6f7f8",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "5px",
-              borderRadius: "6px",
-            }}
-          >
-            <FaNewspaper style={{ fontSize: "30px", color: "#878a8c" }} />
-          </Col>
+
+          {details.image_location != null ? (
+            <Col
+              xs={2}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0px",
+                // margin: "5px",
+              }}
+            >
+              <img
+                src={`${details.image_location}`}
+                // fluid
+                style={{
+                  width: "90px",
+                  height: "75px",
+                  padding: "4px",
+                  borderRadius: "9px",
+                }}
+              />
+            </Col>
+          ) : (
+            <Col
+              xs={2}
+              style={{
+                backgroundColor: "#f6f7f8",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "5px",
+                borderRadius: "6px",
+              }}
+            >
+              <FaNewspaper style={{ fontSize: "30px", color: "#878a8c" }} />
+            </Col>
+          )}
+
           {/* ----------------- post details ------------------- */}
           <Col>
             <div style={{ marginLeft: "5px" }}>

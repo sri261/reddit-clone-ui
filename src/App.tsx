@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -12,7 +13,22 @@ import SubredditPage from "./pages/SubredditPage/SubrredditPage";
 import CreateCommunityPage from "./pages/CreateCommunityPage/CreateCommunityPage";
 import New from "./pages/New/New";
 import EditSubreddit from "./pages/EditSubreddit/EditSubreddit";
+import { checkToken } from "./store/authSlice";
+import { useAppDispatch } from "./store/store";
+
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(checkToken())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <>
       <div style={{ backgroundColor: "#dae0e6", height: "100vh" }}>
@@ -28,7 +44,11 @@ function App() {
                 <Hot />
               </Layout>
             </Route>
-
+            <Route path="/best">
+              <Layout>
+                <h1>best</h1>
+              </Layout>
+            </Route>
             <Route exact path="/submit">
               <NavigationBar />
               <CreatePostPage />

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { api, extractStandardResponseData } from "../api/api";
+import { saveToken, getToken } from "../api/localStorage";
 import { User } from "../interfaces/User";
 import { RootState } from "./store";
 
@@ -37,6 +38,7 @@ export const login = createAsyncThunk(
         password: password,
       })
       .then(extractStandardResponseData);
+    saveToken(user.token);
     return user;
   }
 );
@@ -50,9 +52,16 @@ export const signup = createAsyncThunk(
         password: password,
       })
       .then(extractStandardResponseData);
+    saveToken(user.token);
     return user;
   }
 );
+
+export const checkToken = createAsyncThunk("auth/checkToken", async () => {
+  return await api
+    .post("/checkToken", { token: getToken() })
+    .then(extractStandardResponseData);
+});
 
 export const followSubreddit = createAsyncThunk(
   "auth/follow",
@@ -62,10 +71,13 @@ export const followSubreddit = createAsyncThunk(
       subreddit_id: subreddit_id,
     });
 
-    // console.log(follow.data.followed_subreddits, "follow");
     return { followed_subreddits: follow.data.followed_subreddits };
   }
 );
+
+export const logout = createAsyncThunk("auth/logout", async () => {
+  saveToken("");
+});
 
 export const authSlice = createSlice({
   name: "auth",
@@ -83,6 +95,13 @@ export const authSlice = createSlice({
       username: payload.username,
       token: payload.token,
     }));
+    builder.addCase(checkToken.fulfilled, (state, { payload }) => ({
+      id: payload.id,
+      username: payload.username,
+      token: payload.token,
+      followed_subreddits: payload.followed_subreddits,
+    }));
+    builder.addCase(logout.fulfilled, () => initialState);
     builder.addCase(followSubreddit.fulfilled, (state, { payload }) => ({
       ...state,
       followed_subreddits: payload.followed_subreddits,

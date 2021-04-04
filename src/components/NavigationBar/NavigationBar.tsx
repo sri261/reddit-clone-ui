@@ -8,15 +8,12 @@ import {
   Form,
 } from "react-bootstrap";
 import { FaReddit } from "react-icons/fa";
-import { useSelector } from "react-redux";
 
 import "./NavigationBar.css";
 import { useAppDispatch } from "../../store/store";
-import { signup, login } from "../../store/authSlice";
+import { signup, login, logout } from "../../store/authSlice";
 import CheckAuth from "../CheckAuth";
-import { authSelectors } from "../../store/authSlice";
 
-import { getLatestPostsForUser } from "../../store/postSlice";
 function NavigationBar() {
   const [showModal, setShowModal] = useState(false);
   const [showLogininModal, setLoginModalShowModal] = useState(false);
@@ -25,7 +22,6 @@ function NavigationBar() {
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
-  // const user_id = useSelector(authSelectors.user_id);
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -99,6 +95,7 @@ function NavigationBar() {
           <CheckAuth isPrivate={true}>
             <Button
               onClick={() => {
+                dispatch(logout());
                 setShowModal(false);
               }}
               variant="primary"

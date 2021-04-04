@@ -9,6 +9,14 @@ import { extractStandardResponseData } from "../api/api";
 import { RootState } from "./store";
 import { Subreddit } from "../interfaces/Subreddit";
 
+interface UpdateSubreddit {
+  user_id: string;
+  subreddit_id: string;
+  subreddit_name: string;
+  description: string;
+  image_location: string;
+}
+
 export const searchSubreddit = createAsyncThunk(
   "subreddit/search",
   async (input: string) => {
@@ -37,8 +45,15 @@ export const getSubredditDetails = createAsyncThunk(
 
 export const updateSubreddit = createAsyncThunk(
   "subreddit/create",
-  async () => {
-    const updateSub = await api.post(`subreddits`);
+  async (input: Partial<Subreddit>) => {
+    console.log(input.id);
+    const updateSub = await api.patch(
+      `subreddits/${input.user_id}/${input.id}`,
+      input
+    );
+    console.log(updateSub);
+    return updateSub;
+    // console.log(updateSub);
   }
 );
 
@@ -50,6 +65,7 @@ export const subredditSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getSubredditDetails.fulfilled, (state, { payload }) => {
+      console.log(payload);
       subredditAdapter.upsertMany(state, payload);
     });
   },

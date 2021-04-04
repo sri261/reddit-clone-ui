@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, FormControl, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { useAppDispatch } from "../../store/store";
 import "./CreateCommunityPage.css";
@@ -11,6 +12,7 @@ function CreateCommunityPage() {
   const [subredditDescription, setSubredditDescription] = useState("");
   const [imageLocation, setImageLocation] = useState("");
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const userId = useSelector(authSelectors.user_id);
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +27,7 @@ function CreateCommunityPage() {
       })
     )
       .then((r: any) => {
-        console.log(r);
+        history.goBack();
       })
       .catch((e) => {
         console.log(e);

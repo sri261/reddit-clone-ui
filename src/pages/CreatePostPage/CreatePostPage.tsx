@@ -16,6 +16,7 @@ const CreatePostPage = () => {
   const [subredditId, setSubredditId] = useState<number>();
   const [search, setSearch] = useState<any>();
   const [searchSubredditId, setSearchSubredditId] = useState("");
+  const [imageLocation, setImageLocation] = useState("");
   const dispatch = useAppDispatch();
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,6 +30,7 @@ const CreatePostPage = () => {
         upvotes: 0,
         downvotes: 0,
         comments_count: 0,
+        image_location: imageLocation,
       })
     )
       .then(() => {
@@ -60,6 +62,14 @@ const CreatePostPage = () => {
                 placeholder="Text(Optional)"
                 onChange={(e: any) => {
                   setPostDescription(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <FormControl
+                placeholder="image location"
+                onChange={(e: any) => {
+                  setImageLocation(e.target.value);
                 }}
               />
             </Form.Group>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Form, Card, FormControl, Button } from "react-bootstrap";
+import { Form, Card, FormControl, Button, Row } from "react-bootstrap";
 
 import { useAppDispatch } from "../.././store/store";
+import "./Comments.css";
 import {
   getCommentsForPost,
   commentsSelector,
@@ -48,20 +49,29 @@ function Comments(props: any) {
   return (
     <div>
       {user ? (
-        <div>
-          <Form onSubmit={onFormSubmit}>
-            <Form.Group>
+        <div className="test">
+          <Form onSubmit={onFormSubmit} className="comment_form">
+            <Form.Group className="comments_input">
               <FormControl
-                placeholder="Title"
+                placeholder="What are your thoughts?"
                 onChange={(e: any) => {
                   setComment(e.target.value);
                 }}
+                className="comments_input"
               />
             </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Comment
-            </Button>
+            <Row className="comments_input_button_row">
+              <div>
+                <Button
+                  size="sm"
+                  variant="danger"
+                  type="submit"
+                  className="comments_input_button_row_button"
+                >
+                  Comment
+                </Button>
+              </div>
+            </Row>
           </Form>
         </div>
       ) : (

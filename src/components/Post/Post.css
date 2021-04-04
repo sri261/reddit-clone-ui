@@ -2,9 +2,7 @@
   width: 90vw;
   max-width: 90vw;
 }
-.comments_modal {
-  /* margin-top: 400px; */
-}
+
 .modal_header {
   display: flex;
   align-items: center;
@@ -19,4 +17,27 @@
 }
 .modal_title {
   margin-left: 2rem;
+}
+
+.modal_content {
+  background-color: #878a8c;
+}
+.post_comment_image {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.post_comment_image_image {
+  max-width: 581px;
+}
+.modal_image_card {
+  margin-top: 20px;
+}
+.modal_info_card {
+  margin-top: 20px;
+}
+.modal_info_card_title {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }

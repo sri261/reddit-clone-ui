@@ -22,6 +22,7 @@ function SubrredditPage() {
   const [joined, setJoined] = useState<boolean>(false);
   const { subredditId, subredditName } = useParams<any>();
   const [subredditCreatorId, setSubredditCreatorId] = useState<number>();
+  const [imageLocation, setImageLocation] = useState("");
 
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -38,7 +39,11 @@ function SubrredditPage() {
         });
     }
     Object.keys(posts).map((key) => {
-      console.log(posts[key].subreddit.user_id);
+      console.log(posts[key].subreddit.image_location);
+      if (posts[key].subreddit.image_location !== null) {
+        setImageLocation(posts[key].subreddit.image_location);
+      }
+
       setSubredditCreatorId(posts[key].subreddit.user_id);
     });
 
@@ -57,9 +62,9 @@ function SubrredditPage() {
     <div>
       <NavigationBar />
       <Image
-        src={`https://image.shutterstock.com/image-vector/sample-stamp-grunge-texture-vector-260nw-1389188336.jpg`}
+        src={`${imageLocation}`}
         fluid
-        style={{ height: "25vh", width: "100vw" }}
+        style={{ height: "30vh", width: "100vw" }}
       />
 
       <Row className="w-100 " style={{ marginTop: "25px" }}>

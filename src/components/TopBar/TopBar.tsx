@@ -7,6 +7,7 @@ import "./TopBar.css";
 
 import { useAppDispatch } from "../../store/store";
 import CheckAuth from "../CheckAuth";
+import { emptyPostsSlice } from "../../store/postSlice";
 function TopBar() {
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -21,6 +22,7 @@ function TopBar() {
         <div
           className="top-bar-icon-wrapper"
           onClick={() => {
+            dispatch(emptyPostsSlice());
             history.push("/best");
           }}
         >
@@ -32,6 +34,7 @@ function TopBar() {
       <div
         className="top-bar-icon-wrapper"
         onClick={() => {
+          dispatch(emptyPostsSlice());
           history.push("/hot");
         }}
       >
@@ -42,6 +45,8 @@ function TopBar() {
       <div
         className="top-bar-icon-wrapper"
         onClick={() => {
+          dispatch(emptyPostsSlice());
+
           history.push("/");
         }}
       >

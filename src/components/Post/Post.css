@@ -41,3 +41,15 @@
   justify-content: space-evenly;
   margin-top: 20px;
 }
+.edit_button_col {
+  display: flex;
+  align-self: flex-end;
+}
+.post_edit_button {
+  border-radius: 10px;
+  height: 25px;
+  margin-top: 4px;
+}
+.post_edit_button_text {
+  font-size: 80%;
+}

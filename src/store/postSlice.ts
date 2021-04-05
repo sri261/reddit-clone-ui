@@ -69,6 +69,23 @@ export const getSubredditPosts = createAsyncThunk(
       .then(extractStandardResponseData);
   }
 );
+export const getBestPosts = createAsyncThunk(
+  "posts/best",
+  async (userId?: number) => {
+    return await api
+      .get(`/posts/best/${userId}`)
+      .then(extractStandardResponseData);
+  }
+);
+
+export const editPost = createAsyncThunk("post/update", async (post: any) => {
+  console.log(post, "edit post");
+  api.patch(`posts/${post.user_id}/${post.post_id}`, {
+    post_title: post.post_title,
+    post_description: post.post_description,
+    image_location: post.image_location,
+  });
+});
 
 export const emptyPostsSlice = createAsyncThunk("posts/empty", () => {});
 
@@ -80,10 +97,12 @@ export const postSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getNewPosts.fulfilled, (state, { payload }) => {
-      //   postsAdapter.upsertMany(state, payload);
       postsAdapter.setAll(state, payload);
     });
     builder.addCase(getHotPosts.fulfilled, (state, { payload }) => {
+      postsAdapter.upsertMany(state, payload);
+    });
+    builder.addCase(getBestPosts.fulfilled, (state, { payload }) => {
       postsAdapter.upsertMany(state, payload);
     });
     builder.addCase(emptyPostsSlice.fulfilled, (state, { payload }) => {
@@ -97,4 +116,7 @@ export const postSlice = createSlice({
 
 export const postsSelector = {
   posts: (state: RootState) => state.posts.entities,
+  // post: (state: RootState, id: any) =>( {
+  //   state.posts.entities[id];
+  // })
 };

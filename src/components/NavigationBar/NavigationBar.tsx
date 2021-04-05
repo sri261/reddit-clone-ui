@@ -6,13 +6,16 @@ import {
   Button,
   Modal,
   Form,
+  Card,
 } from "react-bootstrap";
 import { FaReddit } from "react-icons/fa";
+import { useHistory, Link } from "react-router-dom";
 
 import "./NavigationBar.css";
 import { useAppDispatch } from "../../store/store";
 import { signup, login, logout } from "../../store/authSlice";
 import CheckAuth from "../CheckAuth";
+import { searchSubreddit } from "../../store/subredditSlice";
 
 function NavigationBar() {
   const [showModal, setShowModal] = useState(false);
@@ -20,8 +23,12 @@ function NavigationBar() {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [searchSubredditId, setSearchSubredditId] = useState("");
+  const [search, setSearch] = useState<any>();
+  const [subredditId, setSubredditId] = useState<number>();
 
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,11 +68,56 @@ function NavigationBar() {
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <NavbarBrand color="danger">
-          <div style={{ display: "flex", alignItems: "flex-end" }}>
+          <div
+            style={{ display: "flex", alignItems: "flex-end" }}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
             <FaReddit size="30px" color="#ff4500" />
             <div>&nbsp; reddit</div>
           </div>
         </NavbarBrand>
+        <div>
+          <input
+            onClick={() => {
+              setSearchSubredditId("");
+            }}
+            onChange={(e: any) => {
+              if (e.target.value.length >= 1) {
+                dispatch(searchSubreddit(e.target.value))
+                  .then((r: any) => {
+                    setSearch(r.payload);
+                  })
+                  .catch((e: any) => {
+                    console.log(e);
+                  });
+              }
+            }}
+            value={searchSubredditId}
+          />
+          {search
+            ? Object.keys(search).map((key) => {
+                console.log(search[key]);
+
+                return (
+                  <div
+                    onClick={() => {
+                      setSearchSubredditId(search[key].subreddit_name);
+                      setSubredditId(search[key].id);
+                      setSearch([]);
+                    }}
+                  >
+                    <Link
+                      to={`/subreddit/${subredditId}/${search[key].subreddit_name}`}
+                    >
+                      <Card>{search[key].subreddit_name}</Card>
+                    </Link>
+                  </div>
+                );
+              })
+            : null}
+        </div>
 
         <div style={{ display: "flex", alignItems: "flex-end" }}>
           <CheckAuth isPrivate={false}>

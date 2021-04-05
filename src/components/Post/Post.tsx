@@ -51,7 +51,7 @@ function Post({ details }: PostProps) {
         dialogClassName="my-modal"
         className="modal"
       >
-        {console.log(details)}
+        {console.log(details.user.id)}
         <Modal.Header closeButton style={{ backgroundColor: "black" }}>
           <Modal.Title style={{ color: "white", fontSize: "15px" }}>
             <div className="modal_header">
@@ -248,6 +248,11 @@ function Post({ details }: PostProps) {
                 </div>
               </Row>
             </div>
+          </Col>
+          <Col sm={1}>
+            {details.user.id === userId ? (
+              <Link to={`/post/${details.id}/edit`}>Edit</Link>
+            ) : null}
           </Col>
         </Row>
       </Card>

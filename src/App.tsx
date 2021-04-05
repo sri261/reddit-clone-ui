@@ -13,8 +13,10 @@ import SubredditPage from "./pages/SubredditPage/SubrredditPage";
 import CreateCommunityPage from "./pages/CreateCommunityPage/CreateCommunityPage";
 import New from "./pages/New/New";
 import EditSubreddit from "./pages/EditSubreddit/EditSubreddit";
+import Best from "./pages/Best/Best";
 import { checkToken } from "./store/authSlice";
 import { useAppDispatch } from "./store/store";
+import EditPost from "./pages/EditPost/EditPost";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -46,8 +48,11 @@ function App() {
             </Route>
             <Route path="/best">
               <Layout>
-                <h1>best</h1>
+                <Best />
               </Layout>
+            </Route>
+            <Route path="/post/:post_id/edit">
+              <EditPost />
             </Route>
             <Route exact path="/submit">
               <NavigationBar />

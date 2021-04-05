@@ -7,6 +7,7 @@ import NavigationBar from "./NavigationBar/NavigationBar";
 import TopBar from "./TopBar/TopBar";
 import CreatePost from "./CreatePost/CreatePost";
 import CheckAuth from "./CheckAuth";
+
 // import { top } from "../images/reddit_background_image.png";
 interface LayoutProps {
   children: JSX.Element;
@@ -45,15 +46,17 @@ function Layout({ children }: LayoutProps) {
                       justifyContent: "center",
                     }}
                   >
-                    <Button
-                      variant="danger"
-                      style={{ borderRadius: "30px" }}
-                      onClick={() => {
-                        history.push("/create-community");
-                      }}
-                    >
-                      Create Community
-                    </Button>
+                    <CheckAuth isPrivate={true}>
+                      <Button
+                        variant="danger"
+                        style={{ borderRadius: "30px" }}
+                        onClick={() => {
+                          history.push("/create-community");
+                        }}
+                      >
+                        Create Community
+                      </Button>
+                    </CheckAuth>
                   </Row>
                 </Card.Body>
               </Card>

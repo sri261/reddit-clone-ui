@@ -26,3 +26,11 @@
   border-radius: 15px;
   width: 115%;
 }
+.comment_card {
+  padding: 10px;
+  margin: 6px;
+}
+.comment_card_username {
+  font-size: 80%;
+  color: #f93154;
+}

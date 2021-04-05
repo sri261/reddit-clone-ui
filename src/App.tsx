@@ -17,6 +17,7 @@ import Best from "./pages/Best/Best";
 import { checkToken } from "./store/authSlice";
 import { useAppDispatch } from "./store/store";
 import EditPost from "./pages/EditPost/EditPost";
+// import Profile from "./pages/Profile/Profile";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,6 +42,9 @@ function App() {
                 <New />
               </Layout>
             </Route>
+            {/* <Route exact path="/:user_id">
+              <Profile />
+            </Route> */}
             <Route path="/hot">
               <Layout>
                 <Hot />

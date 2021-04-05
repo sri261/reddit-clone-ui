@@ -82,8 +82,12 @@ function Comments(props: any) {
         // console.log(comments[key]);
         return (
           <div>
-            <h6>comment:{comments[key].comment}</h6>
-            <h6>user:{comments[key].user.username}</h6>
+            <Card className="comment_card">
+              <div className="comment_card_username">
+                u/{comments[key].user.username}
+              </div>
+              <div>{comments[key].comment}</div>
+            </Card>
           </div>
         );
       })}

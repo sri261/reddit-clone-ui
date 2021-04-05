@@ -41,6 +41,9 @@
   justify-content: space-evenly;
   margin-top: 20px;
 }
+.modal_info_card_title:hover {
+  cursor: pointer;
+}
 .edit_button_col {
   display: flex;
   align-self: flex-end;
@@ -52,4 +55,7 @@
 }
 .post_edit_button_text {
   font-size: 80%;
+}
+.post_title:hover {
+  cursor: pointer;
 }

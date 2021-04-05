@@ -83,7 +83,6 @@ function Post({ details }: PostProps) {
           <Col sm={3}>
             <div className="p-100">
               <Card className="modal_info_card">
-                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                 <Card.Title className="modal_info_card_title">
                   {`r/${details?.subreddit.subreddit_name}`}
                 </Card.Title>
@@ -202,7 +201,10 @@ function Post({ details }: PostProps) {
                     setModal(true);
                   }}
                 >
-                  <h6 style={{ marginTop: "8px", marginBottom: "0px" }}>
+                  <h6
+                    style={{ marginTop: "8px", marginBottom: "0px" }}
+                    className="post_title"
+                  >
                     {details?.post_title}
                   </h6>
                 </div>
@@ -222,9 +224,11 @@ function Post({ details }: PostProps) {
                   </Link>
                 </div>
                 &nbsp;
-                <div style={{ fontSize: "12px", color: "#878a8c" }}>
-                  {`Posted by u/${details?.user.username} `}
-                </div>
+                <Link to={`/${details?.user.username}}`}>
+                  <div style={{ fontSize: "12px", color: "#878a8c" }}>
+                    {`Posted by u/${details?.user.username} `}
+                  </div>
+                </Link>
               </Row>
               <Row
                 style={{

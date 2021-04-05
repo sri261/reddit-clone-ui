@@ -16,6 +16,7 @@ import { useAppDispatch } from "../../store/store";
 import { signup, login, logout } from "../../store/authSlice";
 import CheckAuth from "../CheckAuth";
 import { searchSubreddit } from "../../store/subredditSlice";
+import { emptyPostsSlice } from "../../store/postSlice";
 
 function NavigationBar() {
   const [showModal, setShowModal] = useState(false);
@@ -106,6 +107,7 @@ function NavigationBar() {
                       setSearchSubredditId(search[key].subreddit_name);
                       setSubredditId(search[key].id);
                       setSearch([]);
+                      dispatch(emptyPostsSlice());
                     }}
                   >
                     <Link
